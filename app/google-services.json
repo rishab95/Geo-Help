@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "90359162951",
+    "firebase_url": "https://securehome-b0c59.firebaseio.com",
+    "project_id": "securehome-b0c59",
+    "storage_bucket": "securehome-b0c59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90359162951:android:8ad1ac8e137da7dc",
+        "android_client_info": {
+          "package_name": "com.android.rishab.secure2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90359162951-vkm2pdahvi61b973979efk24j10ts0k1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.rishab.secure2",
+            "certificate_hash": "56AD27BE2634F5FB6E5E86D92FA4B70FEB503A19"
+          }
+        },
+        {
+          "client_id": "90359162951-5la95d3e38ht6uqindt793949khcppcd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6UmrBEPaFOVmfm8JnZw5Eukv_2EUXYAc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90359162951-5la95d3e38ht6uqindt793949khcppcd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
