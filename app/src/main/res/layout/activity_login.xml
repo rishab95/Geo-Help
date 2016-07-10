@@ -13,7 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/imageView"
-        android:layout_marginTop="69dp"
+        android:layout_marginTop="38dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -50,7 +50,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="SIGN IN"
+        android:background="@color/primary"
         android:id="@+id/login_with_password"
         android:layout_below="@+id/edit_text_password"
         android:layout_centerHorizontal="true"

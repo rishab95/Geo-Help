@@ -19,6 +19,7 @@
     <string name="progress_dialog_authenticating_with_firebase">Authenticating with Firebase…</string>
     <string name="progress_dialog_creating_user_with_firebase">Attempting to create account…</string>
     <string name="progress_dialog_check_inbox">Please check your inbox for your password</string>
+    <string name="progress_dialog_logging_with_firebase">Logging In...</string>
 
     <!-- Google Errors -->
     <string name="google_error_recoverable_oauth_error">"Recoverable Google OAuth error: "</string>
@@ -29,7 +30,7 @@
     <string name="google_error_cant_connect_to_api">Are you sure that you set up a project for your app?
         Check out : https://console.developers.google.com/project. Also make sure you have all the proper
     gradle dependencies</string>
-    <string name="app_name" />
+    <string name="app_name">Secure Home</string>
     <string name="title_activity_maps" />
 
     <!-- Errors -->

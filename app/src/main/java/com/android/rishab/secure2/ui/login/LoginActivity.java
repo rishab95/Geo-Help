@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.rishab.secure2.R;
-import com.android.rishab.secure2.ui.MainActivity;
+import com.android.rishab.secure2.ui.MapsActivity;
 import com.android.rishab.secure2.utils.Constants;
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
                             spe.putString(Constants.KEY_USER_ID,uid).apply();
                             //Log.d(LOG_TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
                             Toast.makeText(LoginActivity.this,"Login successfull",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
                             intent.putExtra(Intent.EXTRA_TEXT,uid);
                             startActivity(intent);
                         }
