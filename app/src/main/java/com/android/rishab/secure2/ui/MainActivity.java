@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.android.rishab.secure2.R;
 import com.android.rishab.secure2.ui.login.LoginActivity;
-import com.android.rishab.secure2.utils.MyService;
+import com.android.rishab.secure2.services.MyService;
 import com.firebase.client.Firebase;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.gcm.GcmNetworkManager;
@@ -135,6 +135,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.mapui) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            Intent conIn = new Intent(MainActivity.this, AddContacts.class);
+            startActivity(conIn);
+
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -168,10 +171,10 @@ public class MainActivity extends AppCompatActivity
 
         Task task1 =  new PeriodicTask.Builder()
                 .setService(MyService.class)
-                .setPeriod(30)
-                .setFlex(10)
+                .setPeriod(120)
+                .setFlex(30)
                 .setPersisted(true)
-                .setTag("TaskMulti")
+                .setTag("TaskSingle")
                 .build();
 
         myManager.schedule(task1);
@@ -193,4 +196,7 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v) {
         startTask();
     }
+
+
+
 }

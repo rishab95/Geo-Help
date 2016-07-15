@@ -1,4 +1,4 @@
-package com.android.rishab.secure2.utils;
+package com.android.rishab.secure2.services;
 
 import android.content.Context;
 import android.location.Location;
@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.android.rishab.secure2.models.location;
+import com.android.rishab.secure2.utils.Constants;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.TaskParams;

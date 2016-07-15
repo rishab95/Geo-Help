@@ -3,16 +3,16 @@ package com.android.rishab.secure2.models;
 /**
  * Created by admin on 13-07-2016.
  */
-public class Contacts {
+public class contacts {
 
     String Name;
-    int mobile_no;
+    String mobile_no;
 
-    public Contacts(){
+    public contacts(){
 
     }
 
-    public Contacts(String Name, int mobile_no){
+    public contacts(String Name, String mobile_no){
         this.Name = Name;
         this.mobile_no = mobile_no;
     }
@@ -20,6 +20,6 @@ public class Contacts {
 
     public String getName() { return Name;  }
 
-    public int getMobile_no() { return mobile_no; }
+    public String getMobile_no() { return mobile_no; }
 
 }
