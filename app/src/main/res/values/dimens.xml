@@ -21,5 +21,8 @@
     <dimen name="lists_row_height">70dp</dimen>
     <dimen name="empty_footer_height">80dp</dimen>
     <dimen name="logo_image_size">100dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
 
 </resources>

@@ -127,7 +127,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                         }
                     }
                 });
-
     }
 
     /**
@@ -201,6 +200,11 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    public void onSignInPressed(View view){
+        Intent in = new Intent(CreateAccountActivity.this,  LoginActivity.class);
+        startActivity(in);
     }
 
 }
