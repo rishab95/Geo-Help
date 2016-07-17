@@ -34,9 +34,9 @@ public class AddContacts extends AppCompatActivity{
     private static final int REQUEST_CODE_PICK_CONTACTS = 1;
     private Uri uriContact;
     private String contactID;// contacts unique ID
-    String contactNumber , contactName, cname, cno;
+    String MycontactNumber , MycontactName, cname, cno;
 
-    private TextView phone, name;
+    private TextView phone, con_name;
 
 
     @Override
@@ -51,7 +51,7 @@ public class AddContacts extends AppCompatActivity{
 
 
         phone = (TextView)findViewById(R.id.phone);
-        name = (TextView)findViewById(R.id.name);
+        con_name = (TextView)findViewById(R.id.name);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -99,7 +99,7 @@ public class AddContacts extends AppCompatActivity{
 
     private String retrieveContactNumber() {
 
-        contactNumber = null;
+        MycontactNumber = null;
 
         // getting contacts ID
         Cursor cursorID = getContentResolver().query(uriContact,
@@ -129,20 +129,20 @@ public class AddContacts extends AppCompatActivity{
                 null);
 
         if (cursorPhone.moveToFirst()) {
-            contactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            MycontactNumber = cursorPhone.getString(cursorPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
         }
 
         cursorPhone.close();
 
-        Log.d(TAG, "Contact Phone Number: " + contactNumber);
-        phone.setText(contactNumber);
+        Log.d(TAG, "Contact Phone Number: " + MycontactNumber);
+        phone.setText(MycontactNumber);
 
-        return contactNumber;
+        return MycontactNumber;
     }
 
     private String retrieveContactName() {
 
-        contactName = null;
+        MycontactName = null;
 
         // querying contact data store
         Cursor cursor = getContentResolver().query(uriContact, null, null, null, null);
@@ -152,22 +152,21 @@ public class AddContacts extends AppCompatActivity{
             // DISPLAY_NAME = The display name for the contact.
             // HAS_PHONE_NUMBER =   An indicator of whether this contact has at least one phone number.
 
-            contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            MycontactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
         }
 
         cursor.close();
 
-        Log.d(TAG, "Contact Name: " + contactName);
-        name.setText(contactName);
+        Log.d(TAG, "Contact Name: " + MycontactName);
+        con_name.setText(MycontactName);
 
-        return contactName;
+        return MycontactName;
 
     }
 
 
 
-
-    private void pushContact(final String name, final String mobNo){
+    private void pushContact(final String ConName, final String mobNo){
 
 
 
@@ -189,9 +188,8 @@ public class AddContacts extends AppCompatActivity{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getValue() == null){
-                    contacts newCont = new contacts(name, mobNo);
+                    contacts newCont = new contacts(ConName, mobNo);
                     mRef.setValue(newCont);
-
                 }
 
             }
@@ -201,8 +199,6 @@ public class AddContacts extends AppCompatActivity{
 
             }
         });
-
-
     }
 
 }

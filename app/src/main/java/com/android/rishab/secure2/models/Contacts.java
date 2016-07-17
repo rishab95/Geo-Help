@@ -5,21 +5,23 @@ package com.android.rishab.secure2.models;
  */
 public class contacts {
 
-    String Name;
-    String mobile_no;
+    String mycontact_name;
+    String mymobile_no;
 
     public contacts(){
 
     }
 
-    public contacts(String Name, String mobile_no){
-        this.Name = Name;
-        this.mobile_no = mobile_no;
+    public contacts(String mycontactname, String mymobile_no){
+        this.mycontact_name = mycontactname;
+        this.mymobile_no = mymobile_no;
     }
 
+    public String getMycontact_name() {
+        return mycontact_name;
+    }
 
-    public String getName() { return Name;  }
-
-    public String getMobile_no() { return mobile_no; }
-
+    public String getMymobile_no() {
+        return mymobile_no;
+    }
 }
