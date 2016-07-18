@@ -9,9 +9,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.rishab.secure2.R;
@@ -25,7 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class AddContacts extends AppCompatActivity{
+public class AddContacts extends AppCompatActivity implements View.OnClickListener {
 
     Button get, push;
 
@@ -38,6 +40,9 @@ public class AddContacts extends AppCompatActivity{
 
     private TextView phone, con_name;
 
+    private EditText phone_edit, message_edit;
+    Button b1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +52,15 @@ public class AddContacts extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         get = (Button)findViewById(R.id.get_contact);
-        push = (Button)findViewById(R.id.push_contact);
+
 
 
         phone = (TextView)findViewById(R.id.phone);
         con_name = (TextView)findViewById(R.id.name);
 
+        phone_edit = (EditText) findViewById(R.id.enter_phone);
+        message_edit = (EditText)findViewById(R.id.enter_messsge);
+        b1= (Button)findViewById(R.id.button);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -62,17 +70,40 @@ public class AddContacts extends AppCompatActivity{
                         .setAction("Action", null).show();
             }
         });
+
+        b1.setOnClickListener(this);
+        get.setOnClickListener(this);
+
+
+
     }
 
 
-    public void onClickSelectContact(View btnSelectContact) {
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.button:
+                sendSMS();
+                break;
+
+            case R.id.get_contact:
+                startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI),
+                        REQUEST_CODE_PICK_CONTACTS);
+        }
+
+    }
+
+
+/*    public void onClickSelectContact(View btnSelectContact) {
 
         // using native contacts selection
         // Intent.ACTION_PICK = Pick an item from the data, returning what was selected.
         startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), REQUEST_CODE_PICK_CONTACTS);
     }
 
-
+*/
 
 
 
@@ -90,9 +121,6 @@ public class AddContacts extends AppCompatActivity{
             cname = retrieveContactName();
             cno = retrieveContactNumber();
             pushContact(cname, cno);
-
-
-
         }
     }
 
@@ -165,7 +193,6 @@ public class AddContacts extends AppCompatActivity{
     }
 
 
-
     private void pushContact(final String ConName, final String mobNo){
 
 
@@ -178,11 +205,45 @@ public class AddContacts extends AppCompatActivity{
 
         myRef = database.getReference(Constants.FIREBASE_LOCATION_USERS).child(uid);
         final DatabaseReference ContactRef = myRef.child(Constants.FIREBASE_LOCATION_CONTACTS);
+
+
         DatabaseReference getConId = ContactRef.push();
+
+
 
         final String cid = getConId.getKey();
 
         final DatabaseReference mRef = ContactRef.child(cid);
+
+        /*mRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if (dataSnapshot.getValue() == null) {
+                    contacts newCont = new contacts(ConName, mobNo);
+                    mRef.setValue(newCont);
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        }); */
 
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -199,6 +260,49 @@ public class AddContacts extends AppCompatActivity{
 
             }
         });
+    }
+
+    private void sendSMS(){
+
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance().getInstance();
+        DatabaseReference GetContactRef;
+
+
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = currentUser.getUid();
+
+        GetContactRef = database.getReference(Constants.FIREBASE_LOCATION_USERS).child(uid);
+
+        final DatabaseReference contempReference  = GetContactRef.child(Constants.FIREBASE_LOCATION_CONTACTS);
+
+        contempReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println("There are " + dataSnapshot.getChildrenCount() + " Contacts ");
+                for (DataSnapshot ContactSnapshot: dataSnapshot.getChildren()) {
+                    contacts getcon = ContactSnapshot.getValue(contacts.class);
+                    String check  = String.valueOf(getcon.getMycontact_name() + "  " + getcon.getMymobile_no());
+                    Log.e("contact is : ", check );
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+        if(TextUtils.isEmpty(phone_edit.getText().toString())) {
+            return;
+        }
+
+        if(TextUtils.isEmpty(message_edit.getText().toString())) {
+            return;
+        }
     }
 
 }
