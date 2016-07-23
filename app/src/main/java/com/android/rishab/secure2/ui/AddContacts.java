@@ -265,7 +265,7 @@ public class AddContacts extends AppCompatActivity implements View.OnClickListen
     private void sendSMS(){
 
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance().getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference GetContactRef;
 
 

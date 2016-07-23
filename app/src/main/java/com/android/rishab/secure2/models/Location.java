@@ -7,13 +7,19 @@ public class location{
 
     String latitude;
     String longitude;
+    String time_stamp;
 
     public location() {
     }
 
-    public location(String latitude, String longitude){
+    public location(String latitude, String longitude, String time_stamp) {
         this.latitude = latitude;
         this.longitude = longitude;
+        this.time_stamp = time_stamp;
+    }
+
+    public String getTime_stamp() {
+        return time_stamp;
     }
 
     public String getLatitude() {

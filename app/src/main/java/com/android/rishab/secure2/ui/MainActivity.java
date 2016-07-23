@@ -139,7 +139,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(conIn);
 
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.add_contacts) {
+            Intent in1 = new Intent(this, ShowContacts.class);
+            startActivity(in1);
 
         } else if (id == R.id.nav_manage) {
 
@@ -166,13 +168,18 @@ public class MainActivity extends AppCompatActivity
         takeUserToLoginScreenOnUnAuth();
     }
 
+
+
+
+
+
     private void startTask()
     {
 
         Task task1 =  new PeriodicTask.Builder()
                 .setService(MyService.class)
-                .setPeriod(120)
-                .setFlex(30)
+                .setPeriod(3)
+                .setFlex(1)
                 .setPersisted(true)
                 .setTag("TaskSingle")
                 .build();
@@ -196,6 +203,10 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v) {
         startTask();
     }
+
+
+
+
 
 
 
