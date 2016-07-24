@@ -136,11 +136,45 @@ public class ShowContacts extends AppCompatActivity {
 
         cursorPhone.close();
 
-        Log.d(TAG, "Contact Phone Number: " + MycontactNumber);
+        MycontactNumber = convert(MycontactNumber);
+
+        Log.e("Check No", "Contact Phone Number: " + MycontactNumber);
         //phone.setText(MycontactNumber);
 
         return MycontactNumber;
     }
+
+
+    private String convert(String phoneNo){
+
+        if (phoneNo.contains(" ")) {
+            phoneNo = phoneNo.replace(" ", "");
+        }
+        if (phoneNo.contains("-")) {
+            phoneNo = phoneNo.replace("-", "");
+        }
+        if (phoneNo.length() >= 10) {
+            if (phoneNo.contains("-")) {
+                phoneNo = phoneNo.substring(phoneNo.length() - 10, phoneNo.length());
+                if (phoneNo.startsWith("0")) {
+                    phoneNo = phoneNo.substring(1);
+                }
+            } else {
+                phoneNo = phoneNo.substring(phoneNo.length() - 10, phoneNo.length());
+                if (phoneNo.startsWith("0")) {
+                    phoneNo = phoneNo.substring(1);
+                }
+            }
+        }
+        return phoneNo;
+    }
+
+    private String add91(String finalNo){
+
+        return finalNo;
+    }
+
+
 
     private String retrieveContactName() {
 

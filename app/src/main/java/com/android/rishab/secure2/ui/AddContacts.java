@@ -162,11 +162,17 @@ public class AddContacts extends AppCompatActivity implements View.OnClickListen
 
         cursorPhone.close();
 
-        Log.d(TAG, "Contact Phone Number: " + MycontactNumber);
+
+
+        Log.e("Check No", "Contact Phone Number: " + MycontactNumber);
         phone.setText(MycontactNumber);
 
         return MycontactNumber;
     }
+
+
+
+
 
     private String retrieveContactName() {
 
