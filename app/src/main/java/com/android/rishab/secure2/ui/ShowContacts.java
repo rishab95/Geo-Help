@@ -138,6 +138,9 @@ public class ShowContacts extends AppCompatActivity {
 
         MycontactNumber = convert(MycontactNumber);
 
+        String new91 = "+91";
+        MycontactNumber = new91 + MycontactNumber;
+
         Log.e("Check No", "Contact Phone Number: " + MycontactNumber);
         //phone.setText(MycontactNumber);
 
