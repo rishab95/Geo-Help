@@ -30,7 +30,7 @@
     <string name="google_error_cant_connect_to_api">Are you sure that you set up a project for your app?
         Check out : https://console.developers.google.com/project. Also make sure you have all the proper
     gradle dependencies</string>
-    <string name="app_name">Secure Home</string>
+    <string name="app_name">Geo Help</string>
     <string name="title_activity_maps" />
 
     <!-- Errors -->
@@ -44,7 +44,7 @@
     <string name="error_email_taken">The email is already taken.</string>
     <string name="error_invalid_password_not_valid">Please enter a password that is at least 6 characters long.</string>
     <string name="error_cannot_be_empty">This cannot be empty.</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Geo Help</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

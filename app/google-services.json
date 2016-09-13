@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:90359162951:android:8ad1ac8e137da7dc",
         "android_client_info": {
-          "package_name": "com.android.rishab.secure2"
+          "package_name": "com.android.rishab.geohelp"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "90359162951-vkm2pdahvi61b973979efk24j10ts0k1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.android.rishab.secure2",
+            "package_name": "com.android.rishab.geohelp",
             "certificate_hash": "56AD27BE2634F5FB6E5E86D92FA4B70FEB503A19"
           }
         },

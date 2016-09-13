@@ -7,13 +7,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.android.rishab.secure2.ui.login.LoginActivity">
+    tools:context="com.android.rishab.geohelp.ui.login.LoginActivity">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:id="@+id/imageView"
+        android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
+        android:src="@mipmap/ic_launcher"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -50,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SIGN IN"
-        android:background="@color/primary"
+        android:background="@color/colorPrimary"
         android:id="@+id/login_with_password"
         android:layout_below="@+id/edit_text_password"
         android:layout_centerHorizontal="true"
@@ -89,7 +91,7 @@
             android:layout_height="wrap_content"
             android:onClick="onSignUpPressed"
             android:text="@string/button_create_account"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@color/colorAccent"/>
     </LinearLayout>
 
 
