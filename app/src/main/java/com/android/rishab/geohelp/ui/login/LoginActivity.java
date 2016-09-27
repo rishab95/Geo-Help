@@ -12,13 +12,14 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.rishab.geohelp.R;
 import com.android.rishab.geohelp.ui.MainActivity;
 import com.android.rishab.geohelp.utils.Constants;
-import com.android.rishab.geohelp.R;
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,13 +27,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String LOG_TAG = LoginActivity.class.getSimpleName();
     /* A dialog that is presented until the Firebase authentication finished. */
     private ProgressDialog mAuthProgressDialog;
     private EditText mEditTextEmailInput, mEditTextPasswordInput;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    private Button SignIn, SignUp;
+    private String email, password;
 
 
 
@@ -118,9 +122,21 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Sign in with Password provider when user clicks sign in button
      */
-    public void onSignInPressed(View view) {
-        final String email = mEditTextEmailInput.getText().toString();
-        String password = mEditTextPasswordInput.getText().toString();
+
+
+    public void onSignInPressed() {
+
+
+        email = mEditTextEmailInput.getText().toString();
+        password = mEditTextPasswordInput.getText().toString();
+
+        boolean validEmail = isEmailValid(email);
+        boolean validPassword = isPasswordValid(password);
+        if (!validEmail || !validPassword) return;
+
+        mAuthProgressDialog.show();
+
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -130,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor spe = sp.edit();
                             spe.putString(Constants.KEY_USER_ID,uid).apply();
-                            //Log.d(LOG_TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
                             Toast.makeText(LoginActivity.this,"Login successfull",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.putExtra(Intent.EXTRA_TEXT,uid);
@@ -146,10 +162,28 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private boolean isEmailValid(String email) {
+        boolean isGoodEmail =
+                (email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches());
+        if (!isGoodEmail) {
+            mEditTextEmailInput.setError("Please Enter Email");
+            return false;
+        }
+        return isGoodEmail;
+    }
+
+    private boolean isPasswordValid(String password) {
+        if (password.length() < 6) {
+            mEditTextPasswordInput.setError("Please Enter Password");
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Open CreateAccountActivity when user taps on "Sign up" TextView
      */
-    public void onSignUpPressed(View view) {
+    public void onSignUpPressed() {
         Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
         startActivity(intent);
     }
@@ -166,6 +200,21 @@ public class LoginActivity extends AppCompatActivity {
         mAuthProgressDialog.setMessage(getString(R.string.progress_dialog_authenticating_with_firebase));
         mAuthProgressDialog.setCancelable(false);
 
+        SignIn = (Button)findViewById(R.id.login_with_password);
+        SignUp = (Button)findViewById(R.id.btn_signup);
+
+        SignIn.setOnClickListener(this);
+        SignUp.setOnClickListener(this);
+
+
+
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading");
+        mAuthProgressDialog.setMessage("Logging In");
+        mAuthProgressDialog.setCancelable(false);
+
+
+
     }
 
 
@@ -173,6 +222,20 @@ public class LoginActivity extends AppCompatActivity {
      * Sign in with Password provider (used when user taps "Done" action on keyboard)
      */
     public void signInPassword() {
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+
+            case R.id.btn_signup:
+                onSignUpPressed();
+                break;
+            case R.id.login_with_password:
+                onSignInPressed();
+                break;
+        }
+
     }
 
     /**

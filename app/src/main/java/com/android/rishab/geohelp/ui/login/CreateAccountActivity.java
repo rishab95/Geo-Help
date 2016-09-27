@@ -7,13 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.rishab.geohelp.R;
 import com.android.rishab.geohelp.models.User;
 import com.android.rishab.geohelp.utils.Constants;
-import com.android.rishab.geohelp.R;
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +40,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private EditText mEditTextUsernameCreate, mEditTextEmailCreate, mEditTextPasswordCreate;
     private String mUserName, mUserEmail, mPassword;
     private TextView signIn;
+
+    private Button signin, signup;
 
 
 
@@ -71,6 +74,12 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         mEditTextUsernameCreate = (EditText)findViewById(R.id.edit_text_username_create);
         mEditTextPasswordCreate = (EditText)findViewById(R.id.edit_text_password_create);
 
+        signin = (Button)findViewById(R.id.button_signin);
+        signup = (Button)findViewById(R.id.btn_create_account_final);
+
+        signin.setOnClickListener(this);
+        signup.setOnClickListener(this);
+
         /* Setup the progress dialog that is displayed later when authenticating with Firebase */
         mAuthProgressDialog = new ProgressDialog(this);
         mAuthProgressDialog.setTitle(getResources().getString(R.string.progress_dialog_loading));
@@ -83,12 +92,25 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
 
+        switch (v.getId()){
+            case R.id.btn_create_account_final:
+                onCreateAccountPressed();
+                break;
+
+            case R.id.button_signin:
+                onSignInPressed();
+                break;
+        }
+
+
+
+
     }
 
     /**
      * Create new account using Firebase email/password provider
      */
-    public void onCreateAccountPressed(View view) {
+    public void onCreateAccountPressed() {
         mUserName = mEditTextUsernameCreate.getText().toString();
         mUserEmail = mEditTextEmailCreate.getText().toString();
         mPassword = mEditTextPasswordCreate.getText().toString();
@@ -202,7 +224,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    public void onSignInPressed(View view){
+    public void onSignInPressed(){
         Intent in = new Intent(CreateAccountActivity.this,  LoginActivity.class);
         startActivity(in);
     }

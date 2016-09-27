@@ -3,13 +3,14 @@ package com.android.rishab.geohelp.ui;
 import android.app.KeyguardManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,24 +20,19 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.Switch;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.android.rishab.geohelp.services.CustomService;
-import com.android.rishab.geohelp.services.UpdateService;
-import com.android.rishab.geohelp.services.MyService;
 import com.android.rishab.geohelp.R;
+import com.android.rishab.geohelp.services.CustomService;
+import com.android.rishab.geohelp.services.MyService;
+import com.android.rishab.geohelp.services.UpdateService;
 import com.android.rishab.geohelp.ui.login.LoginActivity;
 import com.firebase.client.Firebase;
-
 import com.google.android.gms.gcm.GcmNetworkManager;
+import com.google.android.gms.gcm.OneoffTask;
 import com.google.android.gms.gcm.PeriodicTask;
 import com.google.android.gms.gcm.Task;
-import com.google.android.gms.gcm.OneoffTask;
-
-
 import com.google.firebase.auth.FirebaseAuth;
 
 //import android.location.LocationListener;
@@ -121,21 +117,92 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    DialogInterface.OnClickListener startListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int choice) {
+
+            switch (choice){
+                case DialogInterface.BUTTON_POSITIVE:
+                    try {
+                        startTask();
+                        Toast.makeText(MainActivity.this, "Service Started", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                    }
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+
+        }
+    };
+
+
+    DialogInterface.OnClickListener stopListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int choice) {
+
+            switch (choice){
+                case DialogInterface.BUTTON_POSITIVE:
+                    try {
+                        cancelAllTask();
+                        Toast.makeText(MainActivity.this, "Service Stopped", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                    }
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+
+        }
+    };
+
+    DialogInterface.OnClickListener MessageListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int choice) {
+
+            switch (choice){
+                case DialogInterface.BUTTON_POSITIVE:
+                    try {
+                        startSendingSMS();
+                        Toast.makeText(MainActivity.this, "Message Sending Started", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                    }
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+
+        }
+    };
+
+
+
+
     @Override
     public void onClick(View view) {
 
         switch(view.getId()){
             case R.id.imageView2:
-                startSendingSMS();
+                AlertDialog.Builder builder3 = new AlertDialog.Builder(this);
+                builder3.setMessage("Do you want start sending messages?").setPositiveButton("YES",MessageListener)
+                        .setNegativeButton("NO",MessageListener).show();
                 break;
             case R.id.start_service:
-                startTask();
-                break;
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("Do you want start fetching location?").setPositiveButton("YES",startListener)
+                        .setNegativeButton("NO",startListener).show();
+
             case R.id.stop_service:
-                cancelAllTask();
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setMessage("Do you want stop  fetching location?").setPositiveButton("YES",stopListener)
+                        .setNegativeButton("NO",stopListener).show();
+
         }
 
     }
+
+
+
 
     BroadcastReceiver mybroadcast = new BroadcastReceiver() {
         //When Event is published, onReceive method is called

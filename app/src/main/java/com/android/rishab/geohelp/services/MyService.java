@@ -14,19 +14,10 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.rishab.geohelp.utils.Constants;
 import com.android.rishab.geohelp.databases.MyDatahelper;
-import com.android.rishab.geohelp.models.location;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.TaskParams;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by admin on 14-07-2016.
@@ -99,7 +90,7 @@ public class MyService extends GcmTaskService {
                 if(isNetworkAvailable()) {
                     Location myLocation = this.mCurrentLocation;
                     my_Date = (DateFormat.format("dd-MM-yyyy hh:mm:ss", new java.util.Date()).toString());
-                   // setLocationOnServer(myLocation, my_Date);
+                    // setLocationOnServer(myLocation, my_Date);
                     intodb(myLocation, my_Date);
                 }
             } else {

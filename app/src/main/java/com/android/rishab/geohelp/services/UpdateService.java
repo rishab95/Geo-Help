@@ -10,9 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.rishab.geohelp.Power.TriggerAct;
 import com.android.rishab.geohelp.ui.MainActivity;
-import com.android.rishab.geohelp.utils.utils;
 
 /**
  * Created by Jagdeep on 17/07/16.
@@ -57,7 +55,7 @@ public class UpdateService extends Service {
 
                 on = System.currentTimeMillis();
 
-                if(on - off < 3000)
+                if(on - off < 1500)
                 {
                  count++;
                 }

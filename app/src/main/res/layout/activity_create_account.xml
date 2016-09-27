@@ -7,16 +7,17 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorPrimary"
     tools:context="com.android.rishab.geohelp.ui.login.CreateAccountActivity">
 
 
     <ImageView
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:id="@+id/imageView"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="101dp"
+        android:src="@drawable/app_icon"
         android:layout_alignParentTop="true"
-        android:src="@mipmap/ic_launcher"
         android:layout_centerHorizontal="true" />
 
 
@@ -27,15 +28,16 @@
         android:background="@android:color/white"
         android:ems="10"
         android:id="@+id/edit_text_username_create"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="72dp"
         android:hint="@string/hint_enter_username"
         android:padding="@dimen/edit_text_padding"
         android:textColor="@color/black"
         android:textColorHint="@color/dark_grey"
         android:textSize="@dimen/login_buttons_text_size"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:drawableLeft="@mipmap/user"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -51,7 +53,8 @@
         android:background="@android:color/white"
         android:textSize="@dimen/login_buttons_text_size"
         android:layout_below="@+id/edit_text_username_create"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:drawableLeft="@mipmap/idcard"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -67,43 +70,33 @@
         android:textSize="@dimen/login_buttons_text_size"
         android:id="@+id/edit_text_password_create"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/edit_text_email_create"/>
+        android:layout_below="@+id/edit_text_email_create"
+        android:drawableLeft="@mipmap/locked"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Create Account"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/btn_create_account_final"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="15dp"
+        android:background="@color/icons"
         android:layout_below="@+id/edit_text_password_create"
-        android:onClick="onCreateAccountPressed"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
 
-    <LinearLayout
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:id="@+id/linearLayout"
+        android:text="@string/text_already_have_account"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/button_signin"
+        android:layout_marginTop="15dp"
+        android:background="@color/icons"
         android:layout_below="@+id/btn_create_account_final"
-        android:gravity="center">
-        <TextView
-            android:id="@+id/tv_already_have_account"
-            style="@style/LoginCreateText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_already_have_account"
-            android:textColor="@color/accent"/>
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/tv_sign_in"
-            style="@style/LoginCreateTextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onSignInPressed"
-            android:text="@string/button_sign_in"
-            android:textColor="@color/colorAccent"/>
-    </LinearLayout>
 
 
 
