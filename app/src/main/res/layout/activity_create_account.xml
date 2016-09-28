@@ -34,7 +34,8 @@
         android:textColor="@color/black"
         android:textColorHint="@color/dark_grey"
         android:textSize="@dimen/login_buttons_text_size"
-        android:drawableLeft="@mipmap/user"
+
+
         android:layout_below="@+id/imageView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

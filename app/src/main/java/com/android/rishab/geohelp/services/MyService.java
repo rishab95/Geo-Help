@@ -15,9 +15,18 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.rishab.geohelp.databases.MyDatahelper;
+import com.android.rishab.geohelp.models.location;
+import com.android.rishab.geohelp.utils.Constants;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.TaskParams;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by admin on 14-07-2016.
@@ -78,7 +87,9 @@ public class MyService extends GcmTaskService {
                 if(isNetworkAvailable()) {
                     Location myLocation = this.mCurrentLocation;
                     my_Date = (DateFormat.format("dd-MM-yyyy hh:mm:ss", new java.util.Date()).toString());
-                    //setLocationOnServer(myLocation, my_Date);
+                    if(isNetworkAvailable()){
+                        setLocationOnServer(myLocation, my_Date);
+                    }
                     intodb(myLocation, my_Date);
 
 
@@ -90,7 +101,10 @@ public class MyService extends GcmTaskService {
                 if(isNetworkAvailable()) {
                     Location myLocation = this.mCurrentLocation;
                     my_Date = (DateFormat.format("dd-MM-yyyy hh:mm:ss", new java.util.Date()).toString());
-                    // setLocationOnServer(myLocation, my_Date);
+                    if(isNetworkAvailable()){
+                        setLocationOnServer(myLocation, my_Date);
+                    }
+
                     intodb(myLocation, my_Date);
                 }
             } else {
@@ -133,7 +147,7 @@ public class MyService extends GcmTaskService {
         @Override
         protected Void doInBackground(String... params) {
 
-            //mLat , mlong, Date
+
             mlatitude = params[0];
             mlongitude = params[1];
             mDate = params[2];
@@ -158,7 +172,7 @@ public class MyService extends GcmTaskService {
         public void onPostExecute(Void aVoid) {
 
 
-            //sharedPreferences = getSharedPreferences(MyPrefrences,Context.MODE_PRIVATE);
+            sharedPreferences = getSharedPreferences(MyPrefrences,Context.MODE_PRIVATE);
 
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MyService.this);
             //https://www.google.com/maps?z=12&t=m&q=38.9419+78.3020
@@ -177,8 +191,8 @@ public class MyService extends GcmTaskService {
             Toast.makeText(MyService.this,LocUrl, Toast.LENGTH_SHORT).show();
             Toast.makeText(MyService.this,"Thanks", Toast.LENGTH_SHORT).show();
 
-            //Sendtoloc = sharedPreferences.getString(LocationKey,LocUrl);
-            //Log.e("Sendtolc", Sendtoloc);
+            Sendtoloc = sharedPreferences.getString(LocationKey,LocUrl);
+            Log.e("Sendtolc", Sendtoloc);
 
 
 
@@ -191,7 +205,7 @@ public class MyService extends GcmTaskService {
         }
     }
 
-/*
+
     private void setLocationOnServer(Location  myloc, String mydate)  {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             Log.e("gcm","Trying to put location on server");
 
@@ -226,6 +240,6 @@ public class MyService extends GcmTaskService {
             }
         });
 
-    }  */
+    }
 
 }

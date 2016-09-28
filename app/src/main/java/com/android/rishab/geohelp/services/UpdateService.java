@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.rishab.geohelp.ui.MainActivity;
 
@@ -25,7 +24,6 @@ public class UpdateService extends Service {
         // register receiver that handles screen on and screen off logic
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
-
         registerReceiver(mybroadcast, filter);
     }
 
@@ -42,20 +40,19 @@ public class UpdateService extends Service {
     }
 
     BroadcastReceiver mybroadcast = new BroadcastReceiver() {
-        //When Event is published, onReceive method is called
+
         @Override
         public void onReceive(Context context, Intent intent) {
             // TODO Auto-generated method stub
             Log.i("PowerTest", "MyReceiver"+ count);
-            Toast.makeText(context,"MyReceiver"+count,Toast.LENGTH_SHORT).show();
+      //      Toast.makeText(context,"MyReceiver"+count,Toast.LENGTH_SHORT).show();
 
             if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                 Log.i("PowerTest", "Screen ON");
 
-
                 on = System.currentTimeMillis();
 
-                if(on - off < 1500)
+                if(on - off < 2000)
                 {
                  count++;
                 }
@@ -63,10 +60,8 @@ public class UpdateService extends Service {
                 {
                     count=0;
                 }
-
-
-
             }
+
             else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 Log.i("PowerTest", "Screen OFF");
                 off = System.currentTimeMillis();
@@ -90,10 +85,6 @@ public class UpdateService extends Service {
 
                 }
             }
-
         }
     };
-
-
-
 }

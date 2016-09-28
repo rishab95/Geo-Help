@@ -35,7 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ShowContacts extends AppCompatActivity {
+public class ShowContacts extends AppCompatActivity implements View.OnClickListener {
 
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -49,6 +49,7 @@ public class ShowContacts extends AppCompatActivity {
     private EditText phone_edit, message_edit;
 
     private ContactAdapter contactAdapter;
+    private RecyclerView.Adapter mAdapter;
 
     private ArrayList<contacts> contactList = new ArrayList<>();
 
@@ -60,11 +61,11 @@ public class ShowContacts extends AppCompatActivity {
         setContentView(R.layout.activity_show_contacts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-  /*
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.users);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-  */
+
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+  //      getSupportActionBar().setLogo(R.mipmap.users);
+    //    getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         //ListView contactView = (ListView)findViewById(R.id.contact_list);
 
@@ -82,7 +83,6 @@ public class ShowContacts extends AppCompatActivity {
 
         md1 = new MyDatahelper(this);
 
-
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference GetContactRef;
 
@@ -92,6 +92,8 @@ public class ShowContacts extends AppCompatActivity {
         GetContactRef = database.getReference(Constants.FIREBASE_LOCATION_USERS).child(uid);
 
         final DatabaseReference contempReference  = GetContactRef.child(Constants.FIREBASE_LOCATION_CONTACTS);
+
+        contempReference.keepSynced(true);
 
         RecyclerView recycler = (RecyclerView) findViewById(R.id.contact_list);
         contactAdapter = new ContactAdapter(contactList);
@@ -110,9 +112,6 @@ public class ShowContacts extends AppCompatActivity {
                 String gNo = newCon.getMymobile_no();*/
                 contactList.add(newCon);
                 contactAdapter.notifyDataSetChanged();
-
-
-
             }
 
             @Override
@@ -136,17 +135,7 @@ public class ShowContacts extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
         SharedPreferences spe1 = PreferenceManager.getDefaultSharedPreferences(this);
-        String Uid = spe1.getString(Constants.KEY_USER_ID,"");
-
-
-
         //FIREBASE_URL_CONTACTS
 
         //recycler.setHasFixedSize(true);
@@ -181,7 +170,7 @@ public class ShowContacts extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_PICK_CONTACTS && resultCode == RESULT_OK) {
-            Log.d(TAG, "Response: " + data.toString());
+
             uriContact = data.getData();
 
             cname = retrieveContactName();
@@ -199,7 +188,7 @@ public class ShowContacts extends AppCompatActivity {
         boolean b1 = md1.addCon(name, mob);
 
         if(b1){
-            Toast.makeText(this, "Data Added", Toast.LENGTH_SHORT).show();
+
             Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
             Toast.makeText(this, mob, Toast.LENGTH_SHORT).show();
 
@@ -254,8 +243,8 @@ public class ShowContacts extends AppCompatActivity {
         String new91 = "+91";
         MycontactNumber = new91 + MycontactNumber;
 
-        Log.e("Check No", "Contact Phone Number: " + MycontactNumber);
-        //phone.setText(MycontactNumber);
+
+
 
         return MycontactNumber;
     }
@@ -355,5 +344,21 @@ public class ShowContacts extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+
+
     }
 }

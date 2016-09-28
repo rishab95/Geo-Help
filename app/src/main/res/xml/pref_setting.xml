@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference android:title="Select a message to send"
+                        android:key="MessageId"
+                        android:defaultValue="Help me I am in Trouble">
+
+    </EditTextPreference>
+
+</PreferenceScreen>

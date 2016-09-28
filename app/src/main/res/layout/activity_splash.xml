@@ -26,7 +26,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Geo Help"
         android:textColor="@color/accent"
-        android:textSize="80dp"
+        android:textSize="30dp"
         android:id="@+id/textView3"
         android:layout_below="@+id/imageView3"
         android:layout_centerHorizontal="true" />

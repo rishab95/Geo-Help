@@ -32,28 +32,27 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.login.CreateAccountActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.Splash"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
         <service
             android:name=".services.MyService"
@@ -67,8 +66,8 @@
         <activity
             android:name=".ui.ShowContacts"
             android:label="Favourites List"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
         <receiver
             android:name=".services.VolumeChangeReceiver"
@@ -89,8 +88,15 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Power.TriggerAct"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ContactTest" />
+
+        <activity android:name=".utils.Prefactivity">
+
+        </activity>
+
+
     </application>
+
+
 
 </manifest>

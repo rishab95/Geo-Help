@@ -14,18 +14,18 @@
     android:id="@+id/service">
 
     <ImageView
-        android:layout_width="220dp"
-        android:layout_height="220dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:id="@+id/imageView2"
         android:src="@drawable/app_icon_orange"
         android:clickable="true"
+        android:layout_marginBottom="34dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="100dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:text="  START  "
         android:background="@color/colorPrimary"
@@ -39,7 +39,7 @@
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="100dp"
+        android:layout_width="63dp"
         android:layout_height="wrap_content"
         android:text="   STOP   "
         android:textColor="@color/icons"
@@ -61,7 +61,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:textIsSelectable="false"
-        android:textSize="24sp" />
+        android:textSize="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,9 +70,23 @@
         android:text="Click Below to send Messages"
         android:id="@+id/textView4"
         android:textColor="@color/colorPrimaryDark"
-        android:layout_above="@+id/imageView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="28dp"
-        android:textSize="24sp" />
+        android:textSize="20dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:id="@+id/edit_message"
+        android:gravity="center"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/start_service"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_alignEnd="@+id/textView4"
+        android:hint="Please Enter your Message"
+        android:textColorHint="@color/materialize_primary_light"
+        android:background="@color/icons"/>
 
 </RelativeLayout>
