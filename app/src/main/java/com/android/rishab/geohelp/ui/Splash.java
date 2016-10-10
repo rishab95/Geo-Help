@@ -1,34 +1,28 @@
 package com.android.rishab.geohelp.ui;
 
 
-import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.rishab.geohelp.*;
 import com.android.rishab.geohelp.R;
 import com.android.rishab.geohelp.ui.login.LoginActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.PendingResult;
 
 
 public class Splash extends Activity {
 
 
-    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9200;
 
     boolean res = false;
 
@@ -59,8 +53,6 @@ public class Splash extends Activity {
                     || (ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.RECEIVE_BOOT_COMPLETED) != PackageManager.PERMISSION_GRANTED)
 
-                    || (ActivityCompat.checkSelfPermission(this,
-                    Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED)
 
                     ) {
 
@@ -68,7 +60,6 @@ public class Splash extends Activity {
                         android.Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.READ_CONTACTS,
                         Manifest.permission.SEND_SMS,
-                        Manifest.permission.READ_PHONE_STATE,
                         Manifest.permission.RECEIVE_BOOT_COMPLETED
                 };
                 ActivityCompat.requestPermissions(this, perms, 10);
@@ -145,7 +136,7 @@ public class Splash extends Activity {
         protected Void doInBackground(Void... params) {
 
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

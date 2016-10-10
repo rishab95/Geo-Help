@@ -8,14 +8,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.android.rishab.geohelp.ui.Splash"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimaryDark">
 
 
     <ImageView
         android:layout_width="140sp"
         android:layout_height="140sp"
         android:id="@+id/imageView3"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="176dp"
         android:src="@drawable/app_icon"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Geo Help"
-        android:textColor="@color/accent"
-        android:textSize="30dp"
+        android:textColor="#FDF21B"
+        android:textSize="50dp"
         android:id="@+id/textView3"
         android:layout_below="@+id/imageView3"
         android:layout_centerHorizontal="true" />

@@ -1,6 +1,5 @@
 package com.android.rishab.geohelp.rest;
 
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,15 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.rishab.geohelp.R;
+import com.android.rishab.geohelp.databases.MyDatahelper;
 import com.android.rishab.geohelp.models.contacts;
 import com.android.rishab.geohelp.utils.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -38,9 +35,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     String uid = currentUser.getUid();
 
 
-    DatabaseReference ContactRef = database.getReference(Constants.FIREBASE_LOCATION_USERS).child(uid);
 
-    DatabaseReference contempReference  = ContactRef.child(Constants.FIREBASE_LOCATION_CONTACTS);
+
+    MyDatahelper md2;
 
 
 
@@ -60,6 +57,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
             super(itemView);
             ContactName = (TextView)itemView.findViewById(R.id.contactname);
             ContactPhone = (TextView)itemView.findViewById(R.id.contactphone);
+            md2 = new MyDatahelper(itemView.getContext());
         }
     }
 
@@ -90,85 +88,46 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                 final String mobile = contact.getMymobile_no();
                 Log.e("Mob", mobile);
                 deleteContact(mobile);
-
-
-
-
-
+                deletelocal(mobile);
             }
         });
     }
 
 
 
-    DialogInterface.OnClickListener deleteListeneralert = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int choice) {
 
-            switch (choice){
-                case DialogInterface.BUTTON_POSITIVE:
-                    try {
+    public void deletelocal(String mobile){
 
+        String mbl = String.valueOf(mobile);
+        Log.e("to del", mbl);
+        md2.deleteRecord(mbl);
+        Log.e("delte local", "YES Deleted");
 
-                    }catch (Exception e){
-                    }
-                    break;
-                case DialogInterface.BUTTON_NEGATIVE:
-                    break;
-            }
-
-        }
-    };
+    }
 
 
 
     private void deleteContact(final String mob){
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference GetContactRef;
+        DatabaseReference GetCtactRef;
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = currentUser.getUid();
 
-        GetContactRef = database.getReference(Constants.FIREBASE_LOCATION_USERS).child(uid);
+        GetCtactRef = database.getReference(Constants.FIREBASE_LOCATION_USERS).child(uid);
 
-        final DatabaseReference contempReference  = GetContactRef.child(Constants.FIREBASE_LOCATION_CONTACTS);
+        final DatabaseReference ctempReference  = GetCtactRef.child(Constants.FIREBASE_LOCATION_CONTACTS);
 
-        final DatabaseReference deleteRef = contempReference.child(mob);
+        final DatabaseReference delRef = ctempReference.child(mob);
 
-        deleteRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+        delRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Log.e("Remove", "Yes Removed Yuhu");
             }
         });
 
-        deleteRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
 

@@ -45,6 +45,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,6 +194,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             mEditTextUsernameCreate.setError(getResources().getString(R.string.error_cannot_be_empty));
             return false;
         }
+
+
+
         return true;
     }
 

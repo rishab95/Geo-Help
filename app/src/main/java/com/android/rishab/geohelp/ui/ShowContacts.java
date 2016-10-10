@@ -1,11 +1,9 @@
 package com.android.rishab.geohelp.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -35,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ShowContacts extends AppCompatActivity implements View.OnClickListener {
+public class ShowContacts extends AppCompatActivity {
 
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -63,8 +61,8 @@ public class ShowContacts extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
 
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
-  //      getSupportActionBar().setLogo(R.mipmap.users);
-    //    getSupportActionBar().setDisplayUseLogoEnabled(true);
+        //      getSupportActionBar().setLogo(R.mipmap.users);
+        //    getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
         //ListView contactView = (ListView)findViewById(R.id.contact_list);
@@ -108,8 +106,6 @@ public class ShowContacts extends AppCompatActivity implements View.OnClickListe
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 contacts newCon = dataSnapshot.getValue(contacts.class);
-                /*String gName = newCon.getMycontact_name();
-                String gNo = newCon.getMymobile_no();*/
                 contactList.add(newCon);
                 contactAdapter.notifyDataSetChanged();
             }
@@ -135,32 +131,17 @@ public class ShowContacts extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        SharedPreferences spe1 = PreferenceManager.getDefaultSharedPreferences(this);
-        //FIREBASE_URL_CONTACTS
 
-        //recycler.setHasFixedSize(true);
-        //recycler.setLayoutManager(new LinearLayoutManager(this));
-/*
-        FirebaseRecyclerAdapter mAdapter = new FirebaseRecyclerAdapter<contacts, ContactAdapter>(contacts.class, android.R.layout.two_line_list_item, ContactHolder.class, contempReference) {
-            @Override
-            public void populateViewHolder(ContactAdapter contactViewHolder, contacts mContacts, int position) {
-                contactViewHolder.setName(mContacts.getMycontact_name());
-                contactViewHolder.setPhone(mContacts.getMymobile_no());
-            }
-        };
-        recycler.setAdapter(mAdapter);
-*/
 /*
         FirebaseListAdapter<contacts> mAdapter = new FirebaseListAdapter<contacts>(this,contacts.class,android.R.layout.two_line_list_item,contempReference) {
             @Override
             protected void populateView(View v, contacts model, int position) {
                 ((TextView) v.findViewById(android.R.id.text1)).setText(model.getMycontact_name());
                 ((TextView) v.findViewById(android.R.id.text2)).setText(model.getMymobile_no());
-
             }
         };
-*/
-  //      contactView.setAdapter(mAdapter);
+
+              contactView.setAdapter(mAdapter); */
 
     }
 
@@ -274,13 +255,6 @@ public class ShowContacts extends AppCompatActivity implements View.OnClickListe
         return phoneNo;
     }
 
-    private String add91(String finalNo){
-
-        return finalNo;
-    }
-
-
-
     private String retrieveContactName() {
 
         MycontactName = null;
@@ -321,12 +295,7 @@ public class ShowContacts extends AppCompatActivity implements View.OnClickListe
         myRef = database.getReference(Constants.FIREBASE_LOCATION_USERS).child(uid);
         final DatabaseReference ContactRef = myRef.child(Constants.FIREBASE_LOCATION_CONTACTS);
 
-
         final DatabaseReference mRef = ContactRef.child(cno);
-
-
-
-
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -346,19 +315,4 @@ public class ShowContacts extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-
-
-    }
-
-    @Override
-    public void onClick(View view) {
-
-
-
-    }
 }

@@ -1,12 +1,13 @@
 package com.android.rishab.geohelp.databases;
 
-import com.android.rishab.geohelp.utils.Constants;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.android.rishab.geohelp.utils.Constants;
 
 /**
  * Created by rishab on 25/7/16.
@@ -51,6 +52,23 @@ public class MyDatahelper extends SQLiteOpenHelper {
         {
             return false;
         }
+
+    }
+
+    public void deleteRecord(String mob){
+
+        SQLiteDatabase dbdel = this.getWritableDatabase();
+
+        ContentValues cvdel = new ContentValues();
+
+        String whereclause  = "mobile = " + mob  ;
+
+        try {
+            dbdel.delete("contacts", whereclause, null);
+        }catch (SQLException e){
+
+        }
+        dbdel.close();
 
     }
 

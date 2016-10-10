@@ -13,80 +13,72 @@
     tools:showIn="@layout/app_bar_main"
     android:id="@+id/service">
 
-    <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:id="@+id/imageView2"
-        android:src="@drawable/app_icon_orange"
-        android:clickable="true"
-        android:layout_marginBottom="34dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:text="  START  "
-        android:background="@color/colorPrimary"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:text="START LOCATION SERVICE"
+        android:textSize="18dp"
+        android:background="@color/startback"
         android:textColor="@color/icons"
         android:id="@+id/start_service"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
+        android:elevation="3dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginRight="10dp" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="63dp"
-        android:layout_height="wrap_content"
-        android:text="   STOP   "
+
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:text="STOP LOCATION SERVICE"
+        android:textSize="18dp"
         android:textColor="@color/icons"
-        android:background="@color/colorPrimary"
+        android:background="@color/sendback"
         android:id="@+id/stop_service"
+        android:elevation="3dp"
         android:layout_alignTop="@+id/start_service"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="20dp" />
+        android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Location Service"
-        android:id="@+id/textView2"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_alignTop="@+id/stop_service"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:textIsSelectable="false"
-        android:textSize="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Click Below to send Messages"
-        android:id="@+id/textView4"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:id="@+id/edit_message"
-        android:gravity="center"
-        android:layout_marginTop="45dp"
+        android:layout_height="80dp"
+        android:text="CREATE MESSAGE TO SEND "
+        android:textSize="24dp"
+        android:id="@+id/text_message"
+        android:textColor="@color/icons"
+        android:background="@color/textback"
+        android:elevation="3dp"
+        android:layout_above="@+id/send_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:textSize="24dp"
+        android:textColor="@color/icons"
+        android:text="SEND EMERGENCY MESSAGE"
+        android:id="@+id/send_button"
+        android:background="@color/stopback"
+        android:elevation="3dp"
+        android:layout_marginBottom="38dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/placeholder"
         android:layout_below="@+id/start_service"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4"
-        android:layout_alignRight="@+id/textView4"
-        android:layout_alignEnd="@+id/textView4"
-        android:hint="Please Enter your Message"
-        android:textColorHint="@color/materialize_primary_light"
-        android:background="@color/icons"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
 
 </RelativeLayout>

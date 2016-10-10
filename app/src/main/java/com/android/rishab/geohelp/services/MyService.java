@@ -59,6 +59,8 @@ public class MyService extends GcmTaskService {
             case "TaskSingle":
 
                 Log.e("gcmService", "Task1 Running");
+
+
                 getLastKnownLocation();
 
                 return GcmNetworkManager.RESULT_SUCCESS;
@@ -74,6 +76,8 @@ public class MyService extends GcmTaskService {
 
         String gpsLocationProvider = LocationManager.GPS_PROVIDER;
         String networkLocationProvider = LocationManager.NETWORK_PROVIDER;
+
+
 
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -95,7 +99,8 @@ public class MyService extends GcmTaskService {
 
 
                 }
-            } else if (lastKnownNetworkLocation != null) {
+            }
+            else if (lastKnownNetworkLocation != null) {
                 Log.e("gcm", "lastKnownNetworkLocation is used.");
                 this.mCurrentLocation = lastKnownNetworkLocation;
                 if(isNetworkAvailable()) {
@@ -180,16 +185,21 @@ public class MyService extends GcmTaskService {
             final String QUERY_PARAM = "q";
 
             builtUri = Uri.parse(BASE_URL).buildUpon()
-                    .appendQueryParameter(QUERY_PARAM, mlatitude + mlongitude)
+                    .appendQueryParameter(QUERY_PARAM, mlatitude +" "+ mlongitude)
                     .build();
             LocUrl = builtUri.toString();
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             editor.putString("LastLocation", LocUrl);
             editor.commit();
+//            Toast.makeText(MyService.this, "Your location saved", Toast.LENGTH_SHORT).show();
+
+            //String test2 = sharedPreferences.getString("LastLocation","");
+
+
             Log.e("Loc Url", LocUrl);
-            Toast.makeText(MyService.this,LocUrl, Toast.LENGTH_SHORT).show();
-            Toast.makeText(MyService.this,"Thanks", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MyService.this,LocUrl, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MyService.this,"Thanks", Toast.LENGTH_SHORT).show();
 
             Sendtoloc = sharedPreferences.getString(LocationKey,LocUrl);
             Log.e("Sendtolc", Sendtoloc);
@@ -197,9 +207,9 @@ public class MyService extends GcmTaskService {
 
 
 
-            Toast.makeText(MyService.this, "Data Added", Toast.LENGTH_SHORT).show();
-            Toast.makeText(MyService.this, mlatitude + " " + mlongitude , Toast.LENGTH_SHORT).show();
-            Toast.makeText(MyService.this, mDate, Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyService.this, "Location Saved", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(MyService.this, mlatitude + " " + mlongitude , Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MyService.this, mDate, Toast.LENGTH_SHORT).show();
 
             super.onPostExecute(aVoid);
         }

@@ -11,13 +11,9 @@
             android:icon="@mipmap/users"
             android:title="Favourites" />
         <item
-            android:id="@+id/messages"
-            android:icon="@mipmap/smartphone"
-            android:title="Messages" />
-        <item
             android:id="@+id/my_location"
-            android:icon="@mipmap/navigation"
-            android:title="Last Location" />
+            android:icon="@mipmap/ic_logout"
+            android:title="Log Out" />
         <item
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"

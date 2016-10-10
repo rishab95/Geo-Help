@@ -38,15 +38,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button SignIn, SignUp;
     private String email, password;
 
+    private TextView forget_pwd_txt;
+
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         Firebase.setAndroidContext(this);
         mAuth = FirebaseAuth.getInstance();
-        // ...
+
+
+                // ...
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -134,14 +141,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         boolean validPassword = isPasswordValid(password);
         if (!validEmail || !validPassword) return;
 
-        mAuthProgressDialog.show();
 
+        mAuthProgressDialog.show();
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()) {
+
                             String uid = task.getResult().getUser().getUid();
                             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor spe = sp.edit();
@@ -156,6 +164,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Log.w(LOG_TAG, "signInWithEmail", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            mAuthProgressDialog.cancel();
                         }
                     }
                 });
@@ -200,11 +209,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuthProgressDialog.setMessage(getString(R.string.progress_dialog_authenticating_with_firebase));
         mAuthProgressDialog.setCancelable(false);
 
+
+
         SignIn = (Button)findViewById(R.id.login_with_password);
         SignUp = (Button)findViewById(R.id.btn_signup);
 
         SignIn.setOnClickListener(this);
         SignUp.setOnClickListener(this);
+
+        forget_pwd_txt = (TextView)findViewById(R.id.forgot_password_text);
+
+        forget_pwd_txt.setOnClickListener(this);
 
 
 
@@ -234,6 +249,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.login_with_password:
                 onSignInPressed();
                 break;
+            case R.id.forgot_password_text:
+                Intent in3 = new Intent(getApplicationContext(), Rest_password.class);
+                startActivity(in3);
         }
 
     }
@@ -247,10 +265,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //  private void setAuthenticatedUserPasswordProvider(AuthData authData) {
     //  }
 
-    /*
-     * Helper method that makes sure a user is created if the user
-     * logs in with Firebase's Google login provider.
-     * @param authData AuthData object returned from onAuthenticated
-     */
+
+    String emailAddress = "user@example.com";
+
+
 
 }

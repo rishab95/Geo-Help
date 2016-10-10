@@ -3,38 +3,26 @@ package com.android.rishab.geohelp.services;
 /**
  * Created by rishab on 25/8/16.
  */
-import com.android.rishab.geohelp.databases.MyDatahelper;
-import com.android.rishab.geohelp.utils.Constants.*;
+
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
-import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.widget.Toast;
 
-
-import com.android.rishab.geohelp.utils.Constants;
+import com.android.rishab.geohelp.databases.MyDatahelper;
 import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.gcm.GcmTaskService;
 import com.google.android.gms.gcm.TaskParams;
 
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -42,12 +30,16 @@ import java.util.List;
  */
 public class CustomService extends GcmTaskService {
 
-
+    MyService mysrv;
 
     String msg;
     String toloc;
 
+
+
     SharedPreferences sharedPreferences1;
+
+    String textmsg;
 
     int i=0;
     List<String> phones, names;
@@ -55,15 +47,14 @@ public class CustomService extends GcmTaskService {
 
     MyService MyLoc = new MyService();
 
-    String bsms = "Help me i at ";
+
+
+//    String bsms = "Help me i at ";
 
 
 
     @Override
     public int onRunTask(TaskParams taskParams) {
-
-//        registerReceiver(br1,
-  //              new IntentFilter("com.android.rishab.smscrm.smssent"));
 
         switch (taskParams.getTag()) {
             case "Messagetask":
@@ -75,8 +66,6 @@ public class CustomService extends GcmTaskService {
                 return GcmNetworkManager.RESULT_FAILURE;
 
         }
-
-
     }
 
 
@@ -119,17 +108,26 @@ public class CustomService extends GcmTaskService {
     private void sendSMS(String phone, String name) {
 
 
+
+
         SmsManager sm1 = SmsManager.getDefault();
 
-        sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(CustomService.this);
         toloc = sharedPreferences1.getString("LastLocation","");
+        Log.e("LOCCCCC", toloc);
+
+        textmsg = sharedPreferences1.getString("My Message", "");
+
+
 
         String myLc = (toloc).toString();
         Log.e("TEST",myLc);
-        msg = bsms + myLc;
+        Log.e("TESTING    ", textmsg);
+        msg = textmsg +  "I am at " +  myLc;
         Log.e("Text11",msg);
 
-        List<String> messages = sm1.divideMessage("Dear " + name  + msg);
+
+        List<String> messages = sm1.divideMessage("Dear " + name +" " + msg);
 
 
         for (String message : messages) {

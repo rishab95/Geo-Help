@@ -44,15 +44,15 @@ public class UpdateService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             // TODO Auto-generated method stub
-            Log.i("PowerTest", "MyReceiver"+ count);
+            Log.e("PowerTest", "MyReceiver"+ count);
       //      Toast.makeText(context,"MyReceiver"+count,Toast.LENGTH_SHORT).show();
 
             if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-                Log.i("PowerTest", "Screen ON");
+                Log.e("PowerTest", "Screen ON");
 
                 on = System.currentTimeMillis();
 
-                if(on - off < 2000)
+                if(on - off <= 1000)
                 {
                  count++;
                 }
@@ -63,10 +63,10 @@ public class UpdateService extends Service {
             }
 
             else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-                Log.i("PowerTest", "Screen OFF");
+                Log.e("PowerTest", "Screen OFF");
                 off = System.currentTimeMillis();
                 interval1 = off - on;
-                if(interval1 < 2000)
+                if(interval1 <= 1000)
                 {
                     count++;
                 }
